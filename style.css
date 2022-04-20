@@ -1,0 +1,67 @@
+body {
+  font-family: 'Noto Sans', sans-serif;
+}
+
+section {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+div[column] {
+  display: flex;
+  flex-direction: column;
+  gap: 0.8em;
+}
+
+div[row] {
+  display: flex;
+  flex-direction: row;
+  gap: 1em;
+  align-items: center;
+}
+
+div[card] {
+  padding: 2em;
+  border-radius: 1em;
+  box-shadow: 0 0 1em 0 #1b1b1b;
+}
+
+div[spacer] {
+  height: 1em;
+}
+
+.text-field {
+  padding: 0.8em;
+  border-radius: 4px;
+  border: 1px solid #1b1b1b;
+  outline: none;
+}
+
+.text-field:focus {
+  border: 1px solid rgb(65, 128, 245);
+  box-shadow: 0 0 1px 1px rgb(65, 128, 245);
+}
+
+.btn {
+  background-color: rgb(65, 128, 245);
+  color: white;
+  border: none;
+  border-radius: 4px;
+  padding: 0.8em;
+  text-transform: uppercase;
+}
+
+.btn:hover {
+  box-shadow: 0 0 8px 0 #1b1b1b;
+}
+
+.warning {
+  background-color: rgb(224, 106, 26);
+}
+
+#message {
+  text-align: center;
+}

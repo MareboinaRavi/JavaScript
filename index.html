@@ -1,22 +1,35 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-      <meta charset="UTF-8">
-      <meta name="viewport" content="width=device-width, initial-scale=1.0">
-      <title>Number Guesser Game</title>
-      <link rel="stylesheet" href="./bootstrap4css.css">
-</head>
-<body>
-      <div class="container">
-            <h1>Welcome to number Guesser Game</h1>
-            <div id="game">
-            <p>enter in between <span class="min-num">1</span> and <span class="max-num">10</span></p>
-            <input type="number" name="number" id="input-num" placeholder="Enter your guess..."><br></br>
-            <input type="button" class="btn btn-primary" value="Submit" id="input-btn">
-            <p class="message"></p>
-      </div>
-      </div>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-   <script src="app.js"></script>   
-</body>
+        <title>Number Guesser Game</title>
+
+        <link rel="stylesheet" href="./style.css">
+
+        <!-- Font -->
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Noto+Sans&display=swap" rel="stylesheet">
+    </head>
+    <body>
+        <section>
+            <div card column>
+                <h1>Welcome to number Guesser Game</h1>
+
+                <div row>
+                    <div>Enter in between <strong id="min-num">--</strong> and <strong id="max-num">--</strong>:</div>
+                    <input type="number" class="text-field" id="input-num" placeholder="Enter your guess...">
+                    <input type="button" value="Submit" class="btn" id="input-btn">
+                </div>
+
+                <div spacer></div>
+
+                <div id="message"></div>
+            </div>
+        </section>
+
+        <script src="app.js"></script>   
+    </body>
 </html>

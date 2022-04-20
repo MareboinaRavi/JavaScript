@@ -1,80 +1,62 @@
-let min=1,
-    max=10,
-    crtguess = randomNo(min, max),
-    atmps = 3;
+const randomNo = (min, max) => Math.floor(Math.random() * (max - min + 1) + min);
+
+// Game settings
+const min = 1;
+const max = 10;
+const correct = randomNo(min, max);
+let attempts = 3;
+let gameFinished = false;
+
 // UI Elements
-function randomNo(min, max) {
-      // console.log(Math.floor(Math.random() * (max-min + 1)+min ));
-      return Math.floor(Math.random() * (max-min + 1)+min); 
+const minNum = document.getElementById("min-num");
+const maxNum = document.getElementById("max-num");
+const inputBtn = document.getElementById("input-btn");
+const message = document.getElementById("message");
+const guessInp = document.getElementById("input-num");
+
+// Assign UI min and max
+
+minNum.textContent = min;
+maxNum.textContent = max;
+
+// Listen for a guess
+inputBtn.addEventListener("click", () => {
+  if (gameFinished) return location.reload();
+
+  const guess = Number(guessInp.value);
+
+  // Validate
+  if (isNaN(guess) || guess > max || guess < min) {
+    return setMessage(`Please enter in between ${min} and ${max}`, "#d42e1c");
+  }
+
+  // Check if won
+  if (guess === correct) {
+    return gameOver(true, `${guess} is correct , YOU WON!!`);
+  }
+
+  // Check lose
+  if (--attempts === 0) {
+    return gameOver(false, `Game Over! YOU LOST!! ${correct} was the correct guess`);
+  }
+
+  setMessage(`Wrong guess! You have ${attempts} chances left`, "#d42e1c");
+});
+
+// Game over
+function gameOver(won, msg) {
+  const color = won ? "#28942d" : "#d42e1c";
+
+  setMessage(msg, color);
+
+  // Play again
+  inputBtn.value = "Play again";
+  inputBtn.className += " warning";
+  gameFinished = true;
 }
-const game=document.querySelector('#game'),
-      minNum = document.querySelector('.min-num'),
-      maxNum = document.querySelector('.max-num'),
-      inputBtn = document.querySelector('#input-btn'),
-      message = document.querySelector('.message'),
-      guessInp = document.querySelector('#input-num');
-//Assign UI min and max
 
-minNum.textContent=min;
-maxNum.textContent=max;
-//play aain eventlistener
-
-game.addEventListener('mousedown',function(e){
-      if(e.target.className === 'btn btn-primary play-again btn-warning'){
-            window.location.reload();
-      }
-}) 
-
-//liisten for guess
-inputBtn.addEventListener('click',function () {
-      let guess = parseInt(guessInp.value);
-      //validate
-      if(isNaN(guess) || guess > max || guess < min){
-            setMessage(`Please enter in between ${min} and ${max}`,'red');
-      }
-      // check if won
-      if(guess === crtguess){
-            gameOver(true,`${crtguess} is correct , YOU WON!!`);
-            // guessInp.disabled = true;
-            // guessInp.style.borderColor = 'green';
-            // setMessage(`${crtguess} is correct , YOU WON!!`,'green');
-      } 
-      // check lose
-      else{
-            atmps-=1;
-            if(atmps === 0){
-                  gameOver(false,`Game Over! YOU LOST !! ${crtguess} is the correct Guess`);
-                  //Game over
-                  // guessInp.disabled = true;
-                  // guessInp.style.borderColor = 'red';
-                  // setMessage(`Game Over! YOU LOST !! ${crtguess} is correct Guess ,`,'red')
-            }
-            else{
-                  if(isNaN(guess) || guess > max || guess < min){
-                        setMessage(`Please enter in between ${min} and ${max}`,'red');
-                  }
-                  else{
-                  guessInp.style.borderColor = 'red';
-                  guessInp.value = '';
-                  setMessage(`wrong guess!. you have ${atmps} chances left`,'red');
-                  }
-
-            }
-      }
-})
-//Game over
-function gameOver(won,msg) {
-      let color;
-      won === true ? color='green' : color='red';
-      guessInp.disabled = true;
-      guessInp.style.borderColor =color;
-      setMessage(msg,color);
-      // play again
-      inputBtn.value='Play again';
-      inputBtn.className +=' play-again btn-warning';
-}
-//setMessage
-function setMessage(msg, color){
-      message.textContent = msg;
-      message.style.color = color;
+// Set message
+function setMessage(msg, color) {
+  message.textContent = msg;
+  message.style.color = color;
 }
